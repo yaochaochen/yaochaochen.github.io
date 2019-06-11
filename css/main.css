@@ -1850,7 +1850,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #cbffb1;
+  background: #1fffc2;
 }
 .feed-link,
 .chat {
@@ -2587,9 +2587,16 @@ pre {
     background-image: url("/images/back.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: 66% 33%;
+    background-position: 50% 50%;
   }
   #footer a {
     color: #eee;
   }
+}
+.main-inner {
+  margin-top: 60px;
+  padding: 60px 60px 60px 60px;
+  background: #fff;
+  opacity: 0.8;
+  min-height: 500px;
 }
