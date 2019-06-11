@@ -1850,7 +1850,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #4abeee;
+  background: #d6b6cb;
 }
 .feed-link,
 .chat {
@@ -2584,7 +2584,7 @@ pre {
 }
 @media screen and (min-width: 1200px) {
   body {
-    background-image: url("/images/background.jpg");
+    background-image: url("/images/back.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 50% 50%;
