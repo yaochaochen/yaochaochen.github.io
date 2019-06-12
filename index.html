@@ -393,7 +393,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/12/JDK11新特性 -httpClient/" class="post-title-link" itemprop="url">java11 --Httpclient</a>
+                <a href="/2019/06/12/JDK11新特性 -httpClient/" class="post-title-link" itemprop="url">java11 --HttpClient</a>
               
             
           </h1>
@@ -418,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2019-06-12 13:25:50" itemprop="dateCreated datePublished" datetime="2019-06-12T13:25:50+08:00">2019-06-12</time>
+              <time title="创建时间：2019-06-12 13:35:28" itemprop="dateCreated datePublished" datetime="2019-06-12T13:35:28+08:00">2019-06-12</time>
             
 
             
@@ -451,7 +451,7 @@
 
           
           
-            <span id="/2019/06/12/JDK11新特性 -httpClient/" class="leancloud_visitors" data-flag-title="java11 --Httpclient">
+            <span id="/2019/06/12/JDK11新特性 -httpClient/" class="leancloud_visitors" data-flag-title="java11 --HttpClient">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -485,34 +485,193 @@
       
         
           
-            <h1 id="JDK11新特性-–httpClient"><a href="#JDK11新特性-–httpClient" class="headerlink" title="JDK11新特性 –httpClient"></a>JDK11新特性 –httpClient</h1><h2 id="一-HttpURLConnenction目前存在的问题"><a href="#一-HttpURLConnenction目前存在的问题" class="headerlink" title="一:HttpURLConnenction目前存在的问题"></a>一:HttpURLConnenction目前存在的问题</h2><p>1.其基类 URLConnection 当初是设计为支持多协议，但其中大多已经成为非主流（ftp, gopher…）<br>2.API 的设计早于 HTTP/1.1，过度抽象<br>3.难以使用，存在许多没有文档化的行为<br>4.它只支持阻塞模式（每个请求 / 响应占用一个线程）</p>
-<p>##二: HttpClient简介<br>httpclient是Apache Jakarta common下的子项目，用来提供高效的、最新的、更能丰富的支持http协议的客户端编程工具包，并且它支持http协议最新的版本和建议。httpclient已经应用在很多项目中，比如Apache Jakarta上很著名的两个开源项目cactus和httplunit都使用了httpclient。</p>
-<p>##三:HttpClient特性<br>1.以可扩展的面向对象的结构实现了HTTP全部的方法（GET、POST、put、delete、head、options、trace）。</p>
+            <hr>
+<h1 id="JDK11新特性-–httpClient"><a href="#JDK11新特性-–httpClient" class="headerlink" title="JDK11新特性 –httpClient"></a>JDK11新特性 –httpClient</h1><h2 id="一-HttpURLConnenction目前存在的问题"><a href="#一-HttpURLConnenction目前存在的问题" class="headerlink" title="一:HttpURLConnenction目前存在的问题"></a>一:HttpURLConnenction目前存在的问题</h2><p>1.其基类 URLConnection 当初是设计为支持多协议，但其中大多已经成为非主流（ftp, gopher…）<br>2.API 的设计早于 HTTP/1.1，过度抽象<br>3.难以使用，存在许多没有文档化的行为<br>4.它只支持阻塞模式（每个请求 / 响应占用一个线程）</p>
+<h2 id="二-HttpClient简介"><a href="#二-HttpClient简介" class="headerlink" title="二: HttpClient简介"></a>二: HttpClient简介</h2><p>httpclient是Apache Jakarta common下的子项目，用来提供高效的、最新的、更能丰富的支持http协议的客户端编程工具包，并且它支持http协议最新的版本和建议。httpclient已经应用在很多项目中，比如Apache Jakarta上很著名的两个开源项目cactus和httplunit都使用了httpclient。</p>
+<h2 id="三-HttpClient特性"><a href="#三-HttpClient特性" class="headerlink" title="三:HttpClient特性"></a>三:HttpClient特性</h2><p>1.以可扩展的面向对象的结构实现了HTTP全部的方法（GET、POST、put、delete、head、options、trace）。</p>
 <p>2.支持HTTPS协议。</p>
 <p>3.通过HTTP代理建立透明的连接。<br>4.连接管理器支持多线程应用。支持设置最大连接数，同事支持设置每个主机的最大连接数，发现并关闭过期的连接。</p>
 <p>5.自动处理Set-Cookie中的Cookie。</p>
 <p>6.插件式的自定义Cookie策略。</p>
 <p>7.request的输出流可以避免流中内容直接缓冲到socket服务器。</p>
 <p>8.Response的输入流可以有效的从socket服务器直接读取相应内容</p>
-<p>##三:使用方法<br>使用HttpClient发送请求、接收响应很简单，一般需要如下几步即可。<br>1、创建httpclient对象。<br>2、创建请求方法的实例，并制定请求url。如果需要发送get请求，创建httpclient对象；如果需要发送post请求，创建httpPOST对象。<br>3、如果需要发送请求参数，可调用httpget、httpPost共同的setparams(HetpParams params)方法来添加请求参数；对于HttpPost对象而言，也可调用setEntity(HttpEntity entity)方法来设置请求参数。<br>4、调用HttpClient对象的execute(HttpUriRequest request)发送请求，该方法返回一个HttpResponse。<br>5、调用HttpResponse的getAllHeaders()、getHeaders(String name)等方法可获取服务器的响应头；调用HttpResponse的getEntity()方法可获取HttpEntity对象，该对象包装了服务器的响应内容。程序可通过该对象获取服务器的响应内容。<br>6、释放连接。无论执行方法是否成功，都必须释放连接</p>
-<p>##四:代码实例</p>
-<p>###实例1:同步get请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void syncGet() throws InterruptedException, IOException &#123;</span><br><span class="line"></span><br><span class="line">    HttpClient client = HttpClient.newHttpClient();</span><br><span class="line">    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(&quot;https://www.baidu.com&quot;)).build();</span><br><span class="line">    HttpResponse&lt;String&gt; response =</span><br><span class="line">            client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三-使用方法"><a href="#三-使用方法" class="headerlink" title="三:使用方法"></a>三:使用方法</h2><p>使用HttpClient发送请求、接收响应很简单，一般需要如下几步即可。<br>1、创建httpclient对象。<br>2、创建请求方法的实例，并制定请求url。如果需要发送get请求，创建httpclient对象；如果需要发送post请求，创建httpPOST对象。<br>3、如果需要发送请求参数，可调用httpget、httpPost共同的setparams(HetpParams params)方法来添加请求参数；对于HttpPost对象而言，也可调用setEntity(HttpEntity entity)方法来设置请求参数。<br>4、调用HttpClient对象的execute(HttpUriRequest request)发送请求，该方法返回一个HttpResponse。<br>5、调用HttpResponse的getAllHeaders()、getHeaders(String name)等方法可获取服务器的响应头；调用HttpResponse的getEntity()方法可获取HttpEntity对象，该对象包装了服务器的响应内容。程序可通过该对象获取服务器的响应内容。<br>6、释放连接。无论执行方法是否成功，都必须释放连接</p>
+<h2 id="四-代码实例"><a href="#四-代码实例" class="headerlink" title="四:代码实例"></a>四:代码实例</h2><h3 id="实例1-同步get请求"><a href="#实例1-同步get请求" class="headerlink" title="实例1:同步get请求"></a>实例1:同步get请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void syncGet() throws InterruptedException, IOException &#123;</span><br><span class="line"></span><br><span class="line">    HttpClient client = HttpClient.newHttpClient();</span><br><span class="line">    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(&quot;https://www.baidu.com&quot;)).build();</span><br><span class="line">    HttpResponse&lt;String&gt; response =</span><br><span class="line">            client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line"></span><br><span class="line">    System.out.println(response.body());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>###实例2:异步Get 请求</p>
-<figure class="highlight plain"><figcaption><span>void asyncGet() throws IOException, InterruptedException, ExecutionException &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    HttpClient client = HttpClient.newHttpClient();</span><br><span class="line">    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(&quot;https://www.baidu.com&quot;)).build();</span><br><span class="line">    CompletableFuture&lt;String&gt; result = client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(HttpResponse::body);</span><br><span class="line">    System.out.println(result.get());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实例2-异步Get-请求"><a href="#实例2-异步Get-请求" class="headerlink" title="实例2:异步Get 请求"></a>实例2:异步Get 请求</h3><figure class="highlight plain"><figcaption><span>void asyncGet() throws IOException, InterruptedException, ExecutionException &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    HttpClient client = HttpClient.newHttpClient();</span><br><span class="line">    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(&quot;https://www.baidu.com&quot;)).build();</span><br><span class="line">    CompletableFuture&lt;String&gt; result = client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).thenApply(HttpResponse::body);</span><br><span class="line">    System.out.println(result.get());</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>###Post请求</p>
-<figure class="highlight plain"><figcaption><span>void testPostForm() throws IOException, InterruptedException &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    HttpClient client = HttpClient.newBuilder().build();</span><br><span class="line">    HttpRequest request = HttpRequest.newBuilder()</span><br><span class="line">            .uri(URI.create(&quot;http://www.w3school.com.cn/demo/demo_form.asp&quot;))</span><br><span class="line">            .header(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;)</span><br><span class="line">            .POST(HttpRequest.BodyPublishers.ofString(&quot;name1=value1&amp;name2=value2&quot;))</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">    HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line">    System.out.println(response.statusCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实例3-Post请求"><a href="#实例3-Post请求" class="headerlink" title="实例3 Post请求"></a>实例3 Post请求</h3><figure class="highlight plain"><figcaption><span>void testPostForm() throws IOException, InterruptedException &#123;</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    HttpClient client = HttpClient.newBuilder().build();</span><br><span class="line">    HttpRequest request = HttpRequest.newBuilder()</span><br><span class="line">            .uri(URI.create(&quot;http://www.w3school.com.cn/demo/demo_form.asp&quot;))</span><br><span class="line">            .header(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;)</span><br><span class="line">            .POST(HttpRequest.BodyPublishers.ofString(&quot;name1=value1&amp;name2=value2&quot;))</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">    HttpResponse&lt;String&gt; response = client.send(request, HttpResponse.BodyHandlers.ofString());</span><br><span class="line">    System.out.println(response.statusCode());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>###实例四:JSON传参 header指定内容是表单类型，然后通过BodyPublishers.ofString传递表单数据，需要自己构建表单参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  ObjectMapper objectMapper = new ObjectMapper();</span><br><span class="line">      StockDto dto = new StockDto();</span><br><span class="line">      dto.setName(&quot;hj&quot;);</span><br><span class="line">      dto.setSymbol(&quot;hj&quot;);</span><br><span class="line">      dto.setType(StockDto.StockType.SH);</span><br><span class="line">      String requestBody = objectMapper</span><br><span class="line">        .writerWithDefaultPrettyPrinter()</span><br><span class="line">        .writeValueAsString(dto);</span><br><span class="line">      </span><br><span class="line">      HttpRequest request = HttpRequest.newBuilder(URI.create(&quot;http://localhost:8080/json/demo&quot;))</span><br><span class="line">        .header(&quot;Content-Type&quot;, &quot;application/json&quot;)</span><br><span class="line">        .POST(HttpRequest.BodyPublishers.ofString(requestBody))</span><br><span class="line">        .build();</span><br><span class="line">      </span><br><span class="line">      CompletableFuture&lt;StockDto&gt; result = HttpClient.newHttpClient()</span><br><span class="line">        .sendAsync(request, HttpResponse.BodyHandlers.ofString())</span><br><span class="line">        .thenApply(HttpResponse::body)</span><br><span class="line">        .thenApply(body -&gt; &#123;</span><br><span class="line">         try &#123;</span><br><span class="line">          return objectMapper.readValue(body,StockDto.class);</span><br><span class="line">         &#125; catch (IOException e) &#123;</span><br><span class="line">          return new StockDto();</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;);StockDto</span><br><span class="line">System.out.println(result.get());</span><br></pre></td></tr></table></figure>
+<h3 id="实例4-JSON传参-header指定内容是表单类型，然后通过BodyPublishers-ofString传递表单数据，需要自己构建表单参数"><a href="#实例4-JSON传参-header指定内容是表单类型，然后通过BodyPublishers-ofString传递表单数据，需要自己构建表单参数" class="headerlink" title="实例4:JSON传参 header指定内容是表单类型，然后通过BodyPublishers.ofString传递表单数据，需要自己构建表单参数"></a>实例4:JSON传参 header指定内容是表单类型，然后通过BodyPublishers.ofString传递表单数据，需要自己构建表单参数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">  ObjectMapper objectMapper = new ObjectMapper();</span><br><span class="line">      StockDto dto = new StockDto();</span><br><span class="line">      dto.setName(&quot;hj&quot;);</span><br><span class="line">      dto.setSymbol(&quot;hj&quot;);</span><br><span class="line">      dto.setType(StockDto.StockType.SH);</span><br><span class="line">      String requestBody = objectMapper</span><br><span class="line">        .writerWithDefaultPrettyPrinter()</span><br><span class="line">        .writeValueAsString(dto);</span><br><span class="line">      </span><br><span class="line">      HttpRequest request = HttpRequest.newBuilder(URI.create(&quot;http://localhost:8080/json/demo&quot;))</span><br><span class="line">        .header(&quot;Content-Type&quot;, &quot;application/json&quot;)</span><br><span class="line">        .POST(HttpRequest.BodyPublishers.ofString(requestBody))</span><br><span class="line">        .build();</span><br><span class="line">      </span><br><span class="line">      CompletableFuture&lt;StockDto&gt; result = HttpClient.newHttpClient()</span><br><span class="line">        .sendAsync(request, HttpResponse.BodyHandlers.ofString())</span><br><span class="line">        .thenApply(HttpResponse::body)</span><br><span class="line">        .thenApply(body -&gt; &#123;</span><br><span class="line">         try &#123;</span><br><span class="line">          return objectMapper.readValue(body,StockDto.class);</span><br><span class="line">         &#125; catch (IOException e) &#123;</span><br><span class="line">          return new StockDto();</span><br><span class="line">         &#125;</span><br><span class="line">        &#125;);StockDto</span><br><span class="line">System.out.println(result.get());</span><br></pre></td></tr></table></figure>
 
-<p>###实例五:并发请求</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//endAsync方法返回的是CompletableFuture，可以方便地进行转换、组合等操作</span><br><span class="line">//这里使用CompletableFuture.allOf组合在一起，最后调用join等待所有future完成</span><br><span class="line">public void testConcurrentRequests()&#123;</span><br><span class="line">        HttpClient client = HttpClient.newHttpClient();</span><br><span class="line">        List&lt;String&gt; urls = List.of(&quot;http://www.baidu.com&quot;,&quot;http://www.alibaba.com/&quot;,&quot;http://www.tencent.com&quot;);</span><br><span class="line">        List&lt;HttpRequest&gt; requests = urls.stream()</span><br><span class="line">                .map(url -&gt; HttpRequest.newBuilder(URI.create(url)))</span><br><span class="line">                .map(reqBuilder -&gt; reqBuilder.build())</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        List&lt;CompletableFuture&lt;HttpResponse&lt;String&gt;&gt;&gt; futures = requests.stream()</span><br><span class="line">                .map(request -&gt; client.sendAsync(request, HttpResponse.BodyHandlers.ofString()))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        futures.stream()</span><br><span class="line">                .forEach(e -&gt; e.whenComplete((resp,err) -&gt; &#123;</span><br><span class="line">                    if(err != null)&#123;</span><br><span class="line">                        err.printStackTrace();</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        System.out.println(resp.body());</span><br><span class="line">                        System.out.println(resp.statusCode());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;));</span><br><span class="line">        CompletableFuture.allOf(futures</span><br><span class="line">                .toArray(CompletableFuture&lt;?&gt;[]::new))</span><br><span class="line">                .join();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实例5-并发请求"><a href="#实例5-并发请求" class="headerlink" title="实例5:并发请求"></a>实例5:并发请求</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//endAsync方法返回的是CompletableFuture，可以方便地进行转换、组合等操作</span><br><span class="line">//这里使用CompletableFuture.allOf组合在一起，最后调用join等待所有future完成</span><br><span class="line">public void testConcurrentRequests()&#123;</span><br><span class="line">        HttpClient client = HttpClient.newHttpClient();</span><br><span class="line">        List&lt;String&gt; urls = List.of(&quot;http://www.baidu.com&quot;,&quot;http://www.alibaba.com/&quot;,&quot;http://www.tencent.com&quot;);</span><br><span class="line">        List&lt;HttpRequest&gt; requests = urls.stream()</span><br><span class="line">                .map(url -&gt; HttpRequest.newBuilder(URI.create(url)))</span><br><span class="line">                .map(reqBuilder -&gt; reqBuilder.build())</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">        List&lt;CompletableFuture&lt;HttpResponse&lt;String&gt;&gt;&gt; futures = requests.stream()</span><br><span class="line">                .map(request -&gt; client.sendAsync(request, HttpResponse.BodyHandlers.ofString()))</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        futures.stream()</span><br><span class="line">                .forEach(e -&gt; e.whenComplete((resp,err) -&gt; &#123;</span><br><span class="line">                    if(err != null)&#123;</span><br><span class="line">                        err.printStackTrace();</span><br><span class="line">                    &#125;else&#123;</span><br><span class="line">                        System.out.println(resp.body());</span><br><span class="line">                        System.out.println(resp.statusCode());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;));</span><br><span class="line">        CompletableFuture.allOf(futures</span><br><span class="line">                .toArray(CompletableFuture&lt;?&gt;[]::new))</span><br><span class="line">                .join();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>##六:总结</p>
-<p>###HttpClient中常用到的类<br><em>HttpClient<br>         |– DefaultHttpClient<br>                   构造方法：     DefaultHttpClient<br>                   主要方法：     HttpResponse  execute(HttpUriRequest request)<br>HttpUriRequest<br>         |– HttpGet<br>                   构造方法：     HttpGet()<br>                                               HttpGet(String uri)<br>         |– HttpPost<br>                   构造方法：     HttpPost(String uri)<br>                   主要方法：     void setEntity(HttpEntity entity)<br>HttpResponse<br>         主要方法：<br>                   StatusLine getStatusLine()<br>                   Header[] getAllHeaders();<br>                   HttpEntity getEntity();<br>HttpEntity<br>         主要方法：<br>                   InputStream getContent();<br>                   long getContentLength();<br>                   Header getContentType();<br>         |– UrlEncodedFormEntity<br>                   构造方法：UrlEncodedFormEntity(List&lt;? extends NameValuePair&gt; params)<br>                                               //用于向请求对象中写入请求实体（包含请求参数（NameValuePair））<br>EntityUtils<br>         public static byte[] toByteArray(HttpEntity entity)<br>         public static String toString(HttpEntity entity)<br>         public static String toString(HttpEntity entity , String encoding)<br>StatusLine<br>         int getStatusCode()<br>HttpStatus<br>         SC_OK   SC_NOT_FOUND<br>Header<br>         String getName()<br>         String getValue()<br>NameValuePair<br>         String getName()<br>         String getValue()<br>         |– BasicNameValuePair<br>                   构造方法：BasicNameValuePair(String name , String value)</em></p>
+<h2 id="六-总结"><a href="#六-总结" class="headerlink" title="六:总结"></a>六:总结</h2><h3 id="HttpClient中常用到的类"><a href="#HttpClient中常用到的类" class="headerlink" title="HttpClient中常用到的类"></a>HttpClient中常用到的类</h3><p><em>HttpClient<br>         |– DefaultHttpClient<br>                   构造方法：     DefaultHttpClient<br>                   主要方法：     HttpResponse  execute(HttpUriRequest request)<br>HttpUriRequest<br>         |– HttpGet<br>                   构造方法：     HttpGet()<br>                                               HttpGet(String uri)<br>         |– HttpPost<br>                   构造方法：     HttpPost(String uri)<br>                   主要方法：     void setEntity(HttpEntity entity)<br>HttpResponse<br>         主要方法：<br>                   StatusLine getStatusLine()<br>                   Header[] getAllHeaders();<br>                   HttpEntity getEntity();<br>HttpEntity<br>         主要方法：<br>                   InputStream getContent();<br>                   long getContentLength();<br>                   Header getContentType();<br>         |– UrlEncodedFormEntity<br>                   构造方法：UrlEncodedFormEntity(List&lt;? extends NameValuePair&gt; params)<br>                                               //用于向请求对象中写入请求实体（包含请求参数（NameValuePair））<br>EntityUtils<br>         public static byte[] toByteArray(HttpEntity entity)<br>         public static String toString(HttpEntity entity)<br>         public static String toString(HttpEntity entity , String encoding)<br>StatusLine<br>         int getStatusCode()<br>HttpStatus<br>         SC_OK   SC_NOT_FOUND<br>Header<br>         String getName()<br>         String getValue()<br>NameValuePair<br>         String getName()<br>         String getValue()<br>         |– BasicNameValuePair<br>                   构造方法：BasicNameValuePair(String name , String value)</em></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+  <div>
+    
+ </div>
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yaochaochen">
+      <meta itemprop="description" content="l个人站，主要涉及前端知识共享、实践教程、前沿技术共同学习等方面">
+      <meta itemprop="image" content="/images/1111.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来自远方的程序猿">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/12/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-12 13:22:58" itemprop="dateCreated datePublished" datetime="2019-06-12T13:22:58+08:00">2019-06-12</time>
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+            <span id="/2019/06/12/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+		<span>℃</span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
         
@@ -1181,171 +1340,6 @@
         
           
             
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-  <div>
-    
- </div>
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="yaochaochen">
-      <meta itemprop="description" content="l个人站，主要涉及前端知识共享、实践教程、前沿技术共同学习等方面">
-      <meta itemprop="image" content="/images/1111.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="来自远方的程序猿">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-11 09:47:33" itemprop="dateCreated datePublished" datetime="2019-06-11T09:47:33+08:00">2019-06-11</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-            <span id="/2019/06/11/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-		<span>℃</span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
           
         
       
