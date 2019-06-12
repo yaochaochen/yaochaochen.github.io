@@ -1316,14 +1316,14 @@
     
 
     $(function() {
-      $.get('https://app-router.leancloud.cn/2/route?appId=' + '2x8LWUgbnbvIgSmvg582zF03')
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + '2x8LWUgbnbvIgSmvg582zF03-gzGzoHsz')
         .done(function({ api_server }) {
           var Counter = function(method, url, data) {
             return $.ajax({
               method: method,
               url: 'https://' + api_server + '/1.1' + url,
               headers: {
-                'X-LC-Id': '2x8LWUgbnbvIgSmvg582zF03',
+                'X-LC-Id': '2x8LWUgbnbvIgSmvg582zF03-gzGzoHsz',
                 'X-LC-Key': 'B9LvA2xRD2IGQwcwI3theiOe',
                 'Content-Type': 'application/json',
               },
