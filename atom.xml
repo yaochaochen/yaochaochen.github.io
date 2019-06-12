@@ -43,32 +43,6 @@
   </entry>
   
   <entry>
-    <title>java8日期操作</title>
-    <link href="http://yoursite.com/2019/06/12/Java8%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2019/06/12/Java8日期时间操作/</id>
-    <published>2019-06-12T03:56:37.051Z</published>
-    <updated>2019-06-12T03:56:37.048Z</updated>
-    
-    <content type="html"><![CDATA[<p>Java8日期时间操作</p><h2 id="一：简介"><a href="#一：简介" class="headerlink" title="一：简介"></a><strong>一：简介</strong></h2><p>在java8之前 日期时间的API一直被开发者诟病，包括：Java.util.Date是可变类型SimpleDateFormat非线程安全等问题。故此，Java8引入了一套全新的日期时间处理API，新的API基于ISO标准日历系统。</p><h2 id="二-Java-util-Date不推荐使用"><a href="#二-Java-util-Date不推荐使用" class="headerlink" title="二:Java.util.Date不推荐使用"></a>二:Java.util.Date不推荐使用</h2><p>Calendar类虽然有所改进，但仍有很多需要改进的地方，所以对于严肃的日期/时间工作，每个人都建议使用Joda-Time. Java 8带来了由JSR-310定义的Joda-Time启发的新java.time.* package，旧的日期/日历类。<br>除了这个一般的缺陷(其中包括缺少一个时区组件以及在DateFormat中更好地处理日期格式化和无法使用非公历日历表示)的问题，有一些具体的问题，真的伤害Date类，包括年份与公元年年份偏移量为1900的事实。</p><p>日历有自己的问题，但即使早在JDK 1.1，显然java.util.Date不会削减它。即使日历是可以说是最差的JDK API，它已经采取到版本7尝试解决它。</p><h2 id="三：Java8初识时间日期"><a href="#三：Java8初识时间日期" class="headerlink" title="三：Java8初识时间日期"></a>三：Java8初识时间日期</h2><h3 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h3><p><code>//Clock时钟        Clock clock = Clock.systemDefaultZone();        long millis = clock.millis();        //获取指定时间点 用Instant         Instant instant = clock.instant();        //也可以取Date        Date legacyDate = Date.from(instant);</code></p><h3 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h3><p><code>//在新API中时区使用ZoneId来表示。        ZoneId.getAvailableZoneIds();        ZoneId zoneId1 = ZoneId.of(&quot;Europe/Berlin&quot;);        ZoneId zoneId2 = ZoneId.of(&quot;Brazil/East&quot;);        System.out.println(zoneId1.getRules());</code></p><h3 id="实例3"><a href="#实例3" class="headerlink" title="实例3"></a>实例3</h3><p><code>/LocalTime 本地时间        LocalTime localTime = LocalTime.now(zoneId1);        LocalTime localTime1 = LocalTime.now(zoneId2);        long hours = ChronoUnit.HOURS.between(localTime1,localTime);        System.out.println(hours);</code>      </p><h3 id="实例4"><a href="#实例4" class="headerlink" title="实例4"></a>实例4</h3><p><code>//LocalTime 提供了多种工厂方法来简化对象的创建，包括解析时间字符串。        LocalTime localTime2= LocalTime.of(23, 59, 59);        System.out.println(localTime);// 23:59:59        DateTimeFormatter germanFormatte = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);        String leetTime = localTime2.format(germanFormatte).toString();        System.out.println(leetTime);</code></p><h2 id="四：相关API说明"><a href="#四：相关API说明" class="headerlink" title="四：相关API说明"></a>四：相关API说明</h2><p>  == nstant         时间戳<br>Duration        持续时间、时间差<br>LocalDate       只包含日期，比如：2018-09-24<br>LocalTime       只包含时间，比如：10:32:10<br>LocalDateTime   包含日期和时间，比如：2018-09-24 10:32:10<br>Peroid          时间段<br>ZoneOffset      时区偏移量，比如：+8:00<br>ZonedDateTime   带时区的日期时间<br>Clock           时钟，可用于获取当前时间戳</p><h1 id="java-time-format-DateTimeFormatter-时间格式化类"><a href="#java-time-format-DateTimeFormatter-时间格式化类" class="headerlink" title="java.time.format.DateTimeFormatter      时间格式化类     "></a>java.time.format.DateTimeFormatter      时间格式化类     </h1><h3 id="五：拓展"><a href="#五：拓展" class="headerlink" title="五：拓展"></a>五：拓展</h3><p><a href>  https://docs.oracle.com/javase/8/docs/api/  </a>        </p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Java8日期时间操作&lt;/p&gt;
-&lt;h2 id=&quot;一：简介&quot;&gt;&lt;a href=&quot;#一：简介&quot; class=&quot;headerlink&quot; title=&quot;一：简介&quot;&gt;&lt;/a&gt;&lt;strong&gt;一：简介&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;在java8之前 日期时间的API一直被开发者诟病，
-      
-    
-    </summary>
-    
-      <category term="java学习" scheme="http://yoursite.com/categories/java%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
     <title></title>
     <link href="http://yoursite.com/2019/06/11/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%9E%8B/"/>
     <id>http://yoursite.com/2019/06/11/单例模型/</id>
