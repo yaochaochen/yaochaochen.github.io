@@ -103,17 +103,17 @@
 
 
 
-  <meta name="description" content="l个人站，主要涉及前端知识共享、实践教程、前沿技术共同学习等方面">
+  <meta name="description" content="Java8日期时间操作 一：简介在java8之前 日期时间的API一直被开发者诟病，包括：Java.util.Date是可变类型SimpleDateFormat非线程安全等问题。故此，Java8引入了一套全新的日期时间处理API，新的API基于ISO标准日历系统。 二:Java.util.Date不推荐使用Calendar类虽然有所改进，但仍有很多需要改进的地方，所以对于严肃的日期/时间工作，每个">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一篇的：">
-<meta property="og:url" content="http://yoursite.com/2019/06/11/第一篇的：/index.html">
+<meta property="og:title" content="来自远方的程序猿">
+<meta property="og:url" content="http://yoursite.com/2019/06/12/Java8日期时间操作/index.html">
 <meta property="og:site_name" content="来自远方的程序猿">
-<meta property="og:description" content="l个人站，主要涉及前端知识共享、实践教程、前沿技术共同学习等方面">
+<meta property="og:description" content="Java8日期时间操作 一：简介在java8之前 日期时间的API一直被开发者诟病，包括：Java.util.Date是可变类型SimpleDateFormat非线程安全等问题。故此，Java8引入了一套全新的日期时间处理API，新的API基于ISO标准日历系统。 二:Java.util.Date不推荐使用Calendar类虽然有所改进，但仍有很多需要改进的地方，所以对于严肃的日期/时间工作，每个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-11T12:18:08.001Z">
+<meta property="og:updated_time" content="2019-06-12T03:16:14.363Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一篇的：">
-<meta name="twitter:description" content="l个人站，主要涉及前端知识共享、实践教程、前沿技术共同学习等方面">
+<meta name="twitter:title" content="来自远方的程序猿">
+<meta name="twitter:description" content="Java8日期时间操作 一：简介在java8之前 日期时间的API一直被开发者诟病，包括：Java.util.Date是可变类型SimpleDateFormat非线程安全等问题。故此，Java8引入了一套全新的日期时间处理API，新的API基于ISO标准日历系统。 二:Java.util.Date不推荐使用Calendar类虽然有所改进，但仍有很多需要改进的地方，所以对于严肃的日期/时间工作，每个">
 
 
 
@@ -123,7 +123,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/06/11/第一篇的：/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/12/Java8日期时间操作/">
 
 
 
@@ -133,7 +133,7 @@
   };
 </script>
 
-  <title>第一篇的： | 来自远方的程序猿</title>
+  <title> | 来自远方的程序猿</title>
   
 
 
@@ -373,7 +373,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/第一篇的：/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/12/Java8日期时间操作/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="yaochaochen">
@@ -390,7 +390,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第一篇的：
+          <h1 class="post-title" itemprop="name headline">
 
               
             
@@ -416,13 +416,9 @@
                 
               
 
-              <time title="创建时间：2019-06-11 20:18:07 / 修改时间：20:18:08" itemprop="dateCreated datePublished" datetime="2019-06-11T20:18:07+08:00">2019-06-11</time>
+              <time title="创建时间：2019-06-12 11:16:14" itemprop="dateCreated datePublished" datetime="2019-06-12T11:16:14+08:00">2019-06-12</time>
             
 
-            
-              
-
-              
             
           </span>
 
@@ -435,7 +431,7 @@
 
           
           
-            <span id="/2019/06/11/第一篇的：/" class="leancloud_visitors" data-flag-title="第一篇的：">
+            <span id="/2019/06/12/Java8日期时间操作/" class="leancloud_visitors" data-flag-title>
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -467,7 +463,37 @@
       
 
       
-        
+        <p>Java8日期时间操作</p>
+<h2 id="一：简介"><a href="#一：简介" class="headerlink" title="一：简介"></a><strong>一：简介</strong></h2><p>在java8之前 日期时间的API一直被开发者诟病，包括：Java.util.Date是可变类型SimpleDateFormat非线程安全等问题。故此，Java8引入了一套全新的日期时间处理API，新的API基于ISO标准日历系统。</p>
+<h2 id="二-Java-util-Date不推荐使用"><a href="#二-Java-util-Date不推荐使用" class="headerlink" title="二:Java.util.Date不推荐使用"></a>二:Java.util.Date不推荐使用</h2><p>Calendar类虽然有所改进，但仍有很多需要改进的地方，所以对于严肃的日期/时间工作，每个人都建议使用Joda-Time. Java 8带来了由JSR-310定义的Joda-Time启发的新java.time.* package，旧的日期/日历类。<br>除了这个一般的缺陷(其中包括缺少一个时区组件以及在DateFormat中更好地处理日期格式化和无法使用非公历日历表示)的问题，有一些具体的问题，真的伤害Date类，包括年份与公元年年份偏移量为1900的事实。</p>
+<p>日历有自己的问题，但即使早在JDK 1.1，显然java.util.Date不会削减它。即使日历是可以说是最差的JDK API，它已经采取到版本7尝试解决它。</p>
+<h2 id="三：Java8初识时间日期"><a href="#三：Java8初识时间日期" class="headerlink" title="三：Java8初识时间日期"></a>三：Java8初识时间日期</h2><h3 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h3><p><code>//Clock时钟
+        Clock clock = Clock.systemDefaultZone();
+        long millis = clock.millis();
+        //获取指定时间点 用Instant 
+        Instant instant = clock.instant();
+        //也可以取Date
+        Date legacyDate = Date.from(instant);</code></p>
+<h3 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h3><p><code>//在新API中时区使用ZoneId来表示。
+        ZoneId.getAvailableZoneIds();
+        ZoneId zoneId1 = ZoneId.of(&quot;Europe/Berlin&quot;);
+        ZoneId zoneId2 = ZoneId.of(&quot;Brazil/East&quot;);
+        System.out.println(zoneId1.getRules());</code></p>
+<h3 id="实例3"><a href="#实例3" class="headerlink" title="实例3"></a>实例3</h3><p><code>/LocalTime 本地时间
+        LocalTime localTime = LocalTime.now(zoneId1);
+        LocalTime localTime1 = LocalTime.now(zoneId2);
+        long hours = ChronoUnit.HOURS.between(localTime1,localTime);
+        System.out.println(hours);</code>      </p>
+<h3 id="实例4"><a href="#实例4" class="headerlink" title="实例4"></a>实例4</h3><p><code>//LocalTime 提供了多种工厂方法来简化对象的创建，包括解析时间字符串。
+        LocalTime localTime2= LocalTime.of(23, 59, 59);
+        System.out.println(localTime);// 23:59:59
+        DateTimeFormatter germanFormatte = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.GERMAN);
+        String leetTime = localTime2.format(germanFormatte).toString();
+        System.out.println(leetTime);</code></p>
+<h2 id="四：相关API说明"><a href="#四：相关API说明" class="headerlink" title="四：相关API说明"></a>四：相关API说明</h2><p>  == nstant         时间戳<br>Duration        持续时间、时间差<br>LocalDate       只包含日期，比如：2018-09-24<br>LocalTime       只包含时间，比如：10:32:10<br>LocalDateTime   包含日期和时间，比如：2018-09-24 10:32:10<br>Peroid          时间段<br>ZoneOffset      时区偏移量，比如：+8:00<br>ZonedDateTime   带时区的日期时间<br>Clock           时钟，可用于获取当前时间戳</p>
+<h1 id="java-time-format-DateTimeFormatter-时间格式化类"><a href="#java-time-format-DateTimeFormatter-时间格式化类" class="headerlink" title="java.time.format.DateTimeFormatter      时间格式化类     "></a>java.time.format.DateTimeFormatter      时间格式化类     </h1><h3 id="五：拓展"><a href="#五：拓展" class="headerlink" title="五：拓展"></a>五：拓展</h3><p><a href>  https://docs.oracle.com/javase/8/docs/api/  
+</a>        </p>
+
       
     </div>
 
@@ -506,8 +532,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/11/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2019/06/11/单例模型/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -515,10 +541,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/11/我的第一篇blog/" rel="prev" title="我的第一篇blog">
-                我的第一篇blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -562,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -655,6 +686,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一：简介"><span class="nav-number">1.</span> <span class="nav-text">一：简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-Java-util-Date不推荐使用"><span class="nav-number">2.</span> <span class="nav-text">二:Java.util.Date不推荐使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三：Java8初识时间日期"><span class="nav-number">3.</span> <span class="nav-text">三：Java8初识时间日期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实例1"><span class="nav-number">3.1.</span> <span class="nav-text">实例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例2"><span class="nav-number">3.2.</span> <span class="nav-text">实例2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例3"><span class="nav-number">3.3.</span> <span class="nav-text">实例3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例4"><span class="nav-number">3.4.</span> <span class="nav-text">实例4</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四：相关API说明"><span class="nav-number">4.</span> <span class="nav-text">四：相关API说明</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#java-time-format-DateTimeFormatter-时间格式化类"><span class="nav-number"></span> <span class="nav-text">java.time.format.DateTimeFormatter      时间格式化类     </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五：拓展"><span class="nav-number">0.1.</span> <span class="nav-text">五：拓展</span></a></li></ol></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
