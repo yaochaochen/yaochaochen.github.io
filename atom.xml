@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-26T06:41:07.209Z</updated>
+  <updated>2019-06-26T10:43:57.391Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hadoop集群搭建</title>
+    <link href="http://yoursite.com/2019/06/26/Hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/"/>
+    <id>http://yoursite.com/2019/06/26/Hadoop集群搭建/</id>
+    <published>2019-06-26T10:43:57.401Z</published>
+    <updated>2019-06-26T10:43:57.391Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Hadoop集群搭建"><a href="#Hadoop集群搭建" class="headerlink" title="Hadoop集群搭建"></a>Hadoop集群搭建</h1><h2 id="Hadoop集群规划"><a href="#Hadoop集群规划" class="headerlink" title="Hadoop集群规划"></a>Hadoop集群规划</h2><pre><code>HDFS: NN DNYARN: RM NM</code></pre><p>hadoop000 192.168.199.234<br>    NN RM<br>    DN NM<br>hadoop001 192.168.199.235<br>    DN NM<br>hadoop002 192.168.199.236<br>    DN NM</p><p>(每台)<br>/etc/hostname: 修改hostname(hadoop000/hadoop001/hadoop002)<br>/etc/hosts： ip和hostname的映射关系<br>    192.168.100.234 hadoop000<br>    192.168.100.235 hadoop001<br>    192.168.100.236 hadoop002</p><h2 id="前置安装-ssh"><a href="#前置安装-ssh" class="headerlink" title="前置安装 ssh"></a>前置安装 ssh</h2><p>(每台)ssh免密码登陆：ssh-keygen -t rsa<br>在hadoop000机器上进行caozuo<br>ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop000<br>ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop001<br>ssh-copy-id -i ~/.ssh/id_rsa.pub hadoop002</p><h2 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h2><p>1）先在hadoop000机器上部署了jdk<br>2）将jdk bin配置到系统环境变量<br>3）将jdk拷贝到其他节点上去(从hadoop000机器出发)<br>scp -r jdk1.8.0_91 hadoop@hadoop001:<del>/app/<br>scp -r jdk1.8.0_91 hadoop@hadoop002:</del>/app/</p><p>scp <del>/.bash_profile hadoop@hadoop001:</del>/scp <del>/.bash_profile hadoop@hadoop002:</del>/</p><h2 id="Hadoop部署"><a href="#Hadoop部署" class="headerlink" title="Hadoop部署"></a>Hadoop部署</h2><h3 id="1）hadoop-env-sh"><a href="#1）hadoop-env-sh" class="headerlink" title="1）hadoop-env.sh"></a>1）hadoop-env.sh</h3><pre><code>JAVA_HOME</code></pre><h3 id="2-core-site-xml"><a href="#2-core-site-xml" class="headerlink" title="2) core-site.xml"></a>2) core-site.xml</h3><property>    <name>fs.default.name</name>    <value>hdfs://hadoop000:8020</value></property><h3 id="3-hdfs-site-xml"><a href="#3-hdfs-site-xml" class="headerlink" title="3) hdfs-site.xml"></a>3) hdfs-site.xml</h3><property>  <name>dfs.namenode.name.dir</name>  <value>/home/hadoop/app/tmp/dfs/name</value></property><property>  <name>dfs.datanode.data.dir</name>  <value>/home/hadoop/app/tmp/dfs/data</value></property><h3 id="4-yarn-site-xml"><a href="#4-yarn-site-xml" class="headerlink" title="4) yarn-site.xml"></a>4) yarn-site.xml</h3><property>  <name>yarn.nodemanager.aux-services</name>  <value>mapreduce_shuffle</value> </property><property>    <name>yarn.resourcemanager.hostname</name>    <value>hadoop000</value></property>### 5) mapred-site.xml<property>    <name>mapreduce.framework.name</name>    <value>yarn</value></property><h3 id="6-slaves"><a href="#6-slaves" class="headerlink" title="6) slaves"></a>6) slaves</h3><h3 id="7-分发hadoop到其他机器"><a href="#7-分发hadoop到其他机器" class="headerlink" title="7) 分发hadoop到其他机器"></a>7) 分发hadoop到其他机器</h3><p>scp -r hadoop-2.6.0-cdh5.15.1 hadoop@hadoop001:<del>/app/<br>scp -r hadoop-2.6.0-cdh5.15.1 hadoop@hadoop002:</del>/app/</p><p>scp <del>/.bash_profile hadoop@hadoop001:</del>/scp <del>/.bash_profile hadoop@hadoop002:</del>/</p><p>8) NN格式化： hadoop namenode -format<br>9) 启动HDFS<br>10) 启动YARN</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Hadoop集群搭建&quot;&gt;&lt;a href=&quot;#Hadoop集群搭建&quot; class=&quot;headerlink&quot; title=&quot;Hadoop集群搭建&quot;&gt;&lt;/a&gt;Hadoop集群搭建&lt;/h1&gt;&lt;h2 id=&quot;Hadoop集群规划&quot;&gt;&lt;a href=&quot;#Hadoop集群规划&quot;
+      
+    
+    </summary>
+    
+      <category term="Hadoop学习之路" scheme="http://yoursite.com/categories/Hadoop%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
+    
+    
+      <category term="Hadoop学习之路" scheme="http://yoursite.com/tags/Hadoop%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%B7%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>HDFS原理（</title>
